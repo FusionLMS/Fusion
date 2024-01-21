@@ -37,15 +37,15 @@ jobs:
 
       - name: 🔄 Restore Nuget Packages
         shell: bash
-        run: dotnet restore ./FusionPlayground/FusionPlayground.sln
+        run: dotnet restore ./backend/Fusion/Fusion.sln
 
       - name: 🛠 Build Solution
         shell: bash
-        run: dotnet build ./FusionPlayground/FusionPlayground.sln
+        run: dotnet build ./Fusion/Fusion.sln
 
       - name: ✅ Run Unit Tests
         shell: bash
-        run: dotnet test ./FusionPlayground/FusionPlayground.sln
+        run: dotnet test ./backend/Fusion/Fusion.sln
 
   sonarcloud_analysis:
     runs-on: ubuntu-latest

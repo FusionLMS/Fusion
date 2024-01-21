@@ -41,7 +41,7 @@ jobs:
 
       - name: 🛠 Build Solution
         shell: bash
-        run: dotnet build ./Fusion/Fusion.sln
+        run: dotnet build ./backend/Fusion/Fusion.sln
 
       - name: ✅ Run Unit Tests
         shell: bash

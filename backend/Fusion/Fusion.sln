@@ -13,6 +13,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		..\..\.github\workflows\dotnet-ci.yml = ..\..\.github\workflows\dotnet-ci.yml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{8CA74CE5-C707-45A5-B98D-A10503E19F03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusion.RestApi", "Fusion.RestApi\Fusion.RestApi.csproj", "{691A814D-CF69-4657-93C5-A1379EC0F697}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fusion.Tests", "Fusion.Tests\Fusion.Tests.csproj", "{CA0EF2B2-8174-41A2-A1C8-F49CD39C0133}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,5 +27,17 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4D438997-5CB1-43E1-A292-C1D7F04B619A} = {6AF410EF-C022-4773-B7A2-5BBA7E35D8B2}
 		{8A379734-9D0F-4606-833F-50CD6775F4BA} = {4D438997-5CB1-43E1-A292-C1D7F04B619A}
+		{691A814D-CF69-4657-93C5-A1379EC0F697} = {8CA74CE5-C707-45A5-B98D-A10503E19F03}
+		{CA0EF2B2-8174-41A2-A1C8-F49CD39C0133} = {8CA74CE5-C707-45A5-B98D-A10503E19F03}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{691A814D-CF69-4657-93C5-A1379EC0F697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{691A814D-CF69-4657-93C5-A1379EC0F697}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{691A814D-CF69-4657-93C5-A1379EC0F697}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{691A814D-CF69-4657-93C5-A1379EC0F697}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA0EF2B2-8174-41A2-A1C8-F49CD39C0133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA0EF2B2-8174-41A2-A1C8-F49CD39C0133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA0EF2B2-8174-41A2-A1C8-F49CD39C0133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA0EF2B2-8174-41A2-A1C8-F49CD39C0133}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

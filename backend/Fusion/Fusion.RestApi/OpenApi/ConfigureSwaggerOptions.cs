@@ -7,9 +7,17 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Fusion.RestApi.OpenApi;
 
+/// <summary>
+/// 
+/// </summary>
+/// <param name="provider"></param>
 public class ConfigureSwaggerOptions(
     IApiVersionDescriptionProvider provider) : IConfigureOptions<SwaggerGenOptions>
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="options"></param>
     public void Configure(SwaggerGenOptions options)
     {
         foreach (var description in provider.ApiVersionDescriptions)

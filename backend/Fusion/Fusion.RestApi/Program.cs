@@ -2,22 +2,30 @@ using Fusion.RestApi.Extensions;
 using Fusion.RestApi.Routing;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddProblemDetails();
-builder.Services.AddHealthChecks();
-
-builder.Services
-    .AddFusionApiVersioning()
-    .AddFusionSwaggerGen();
-
+AddFusionServices(builder);
 
 var app = builder.Build();
-
-var versionedRouteBuilder = app
-    .NewVersionedApi()
-    .HasApiVersion(0);
-
-app.UseFusionSwaggerUi();
-versionedRouteBuilder.MapFusionRouting();
+ConfigureMiddlewares(app);
 
 app.Run();
+return;
+
+
+void AddFusionServices(IHostApplicationBuilder webApplicationBuilder)
+{
+    var services = webApplicationBuilder.Services;
+
+    services
+        .AddProblemDetails()
+        .AddHealthChecks();
+
+    services
+        .AddFusionApiVersioning()
+        .AddFusionSwaggerGen();
+}
+
+void ConfigureMiddlewares(WebApplication appBuilder)
+{
+    appBuilder.MapFusionRouting();
+    appBuilder.UseFusionSwaggerUi();
+}

@@ -17,17 +17,17 @@ public static class SwaggerExtensions
     public static IServiceCollection AddFusionSwaggerGen(
         this IServiceCollection services)
     {
+        services.AddEndpointsApiExplorer();
         services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
-        services.AddSwaggerGen(opt =>
+        services.AddSwaggerGen(options =>
         {
-            // add a custom operation filter which sets default values
-            opt.OperationFilter<SwaggerDefaultValues>();
+            options.OperationFilter<SwaggerDefaultValues>();
 
             var fileName = typeof(Program).Assembly.GetName().Name + ".xml";
             var xmlCommentsFilePath = Path.Combine(AppContext.BaseDirectory, fileName);
 
             // integrate xml comments
-            opt.IncludeXmlComments(xmlCommentsFilePath);
+            options.IncludeXmlComments(xmlCommentsFilePath);
         });
 
         return services;

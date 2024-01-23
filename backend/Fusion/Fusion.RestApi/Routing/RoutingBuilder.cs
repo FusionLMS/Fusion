@@ -1,8 +1,11 @@
-﻿namespace Fusion.RestApi.Routing;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Fusion.RestApi.Routing;
 
 /// <summary>
 /// 
 /// </summary>
+[ExcludeFromCodeCoverage]
 public static class RoutingBuilder
 {
     /// <summary>

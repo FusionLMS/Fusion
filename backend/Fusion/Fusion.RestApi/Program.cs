@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Fusion.RestApi.Extensions;
 using Fusion.RestApi.Routing;
 
@@ -29,3 +30,6 @@ void ConfigureMiddlewares(WebApplication appBuilder)
     appBuilder.MapFusionRouting();
     appBuilder.UseFusionSwaggerUi();
 }
+
+[ExcludeFromCodeCoverage]
+internal partial class Program;

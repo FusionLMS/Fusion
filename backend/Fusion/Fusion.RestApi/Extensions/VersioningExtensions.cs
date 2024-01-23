@@ -1,10 +1,12 @@
-﻿using Asp.Versioning;
+﻿using System.Diagnostics.CodeAnalysis;
+using Asp.Versioning;
 
 namespace Fusion.RestApi.Extensions;
 
 /// <summary>
 /// 
 /// </summary>
+[ExcludeFromCodeCoverage]
 public static class VersioningExtensions
 {
     /// <summary>

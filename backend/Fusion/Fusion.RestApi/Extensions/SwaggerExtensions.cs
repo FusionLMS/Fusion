@@ -1,4 +1,5 @@
-﻿using Fusion.RestApi.OpenApi;
+﻿using System.Diagnostics.CodeAnalysis;
+using Fusion.RestApi.OpenApi;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -7,6 +8,7 @@ namespace Fusion.RestApi.Extensions;
 /// <summary>
 /// Set of swagger extensions methods
 /// </summary>
+[ExcludeFromCodeCoverage]
 public static class SwaggerExtensions
 {
     /// <summary>

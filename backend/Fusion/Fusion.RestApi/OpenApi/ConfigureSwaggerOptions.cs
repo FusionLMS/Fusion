@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text;
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using Microsoft.Extensions.Options;
@@ -11,6 +12,7 @@ namespace Fusion.RestApi.OpenApi;
 /// 
 /// </summary>
 /// <param name="provider"></param>
+[ExcludeFromCodeCoverage]
 public class ConfigureSwaggerOptions(
     IApiVersionDescriptionProvider provider) : IConfigureOptions<SwaggerGenOptions>
 {

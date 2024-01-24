@@ -7,6 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{4D438997-5CB1-43E1-A292-C1D7F04B619A}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\.github\CODEOWNERS = ..\..\.github\CODEOWNERS
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{8A379734-9D0F-4606-833F-50CD6775F4BA}"
 	ProjectSection(SolutionItems) = preProject

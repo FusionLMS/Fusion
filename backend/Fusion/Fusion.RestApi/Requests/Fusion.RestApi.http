@@ -1,0 +1,6 @@
+@Fusion.RestApi_HostAddress = http://localhost:5132
+
+GET {{Fusion.RestApi_HostAddress}}/healthz?api-version=0
+Accept: application/json
+
+###

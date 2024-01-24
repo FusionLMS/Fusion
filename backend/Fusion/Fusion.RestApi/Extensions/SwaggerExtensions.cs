@@ -49,10 +49,11 @@ public static class SwaggerExtensions
                 var descriptions = (app as IEndpointRouteBuilder)!.DescribeApiVersions();
 
                 // build a swagger endpoint for each discovered API version
-                foreach (var description in descriptions)
+                var groupNames = descriptions.Select(x => x.GroupName);
+                foreach (var groupName in groupNames)
                 {
-                    var url = $"/swagger/{description.GroupName}/swagger.json";
-                    var name = description.GroupName.ToUpperInvariant();
+                    var url = $"/swagger/{groupName}/swagger.json";
+                    var name = groupName.ToUpperInvariant();
                     opt.SwaggerEndpoint(url, name);
                 }
             });

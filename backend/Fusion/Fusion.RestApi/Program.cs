@@ -19,27 +19,25 @@ public static class Program
         ConfigureMiddlewares(app);
 
         app.Run();
-        return;
+    }
 
+    private static void AddFusionServices(IHostApplicationBuilder appBuilder)
+    {
+        var services = appBuilder.Services;
 
-        void AddFusionServices(IHostApplicationBuilder appBuilder)
-        {
-            var services = appBuilder.Services;
+        services
+            .AddProblemDetails()
+            .AddHealthChecks();
 
-            services
-                .AddProblemDetails()
-                .AddHealthChecks();
+        services
+            .AddFusionApiVersioning()
+            .AddFusionSwaggerGen()
+            .AddFusionOptions(appBuilder.Configuration);
+    }
 
-            services
-                .AddFusionApiVersioning()
-                .AddFusionSwaggerGen()
-                .AddFusionOptions(appBuilder.Configuration);
-        }
-
-        void ConfigureMiddlewares(WebApplication appBuilder)
-        {
-            appBuilder.MapFusionRouting();
-            appBuilder.UseFusionSwaggerUi();
-        }
+    private static void ConfigureMiddlewares(WebApplication appBuilder)
+    {
+        appBuilder.MapFusionRouting();
+        appBuilder.UseFusionSwaggerUi();
     }
 }

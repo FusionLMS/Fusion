@@ -36,4 +36,4 @@ void ConfigureMiddlewares(WebApplication appBuilder)
 /// Application entry point
 /// </summary>
 [ExcludeFromCodeCoverage]
-public partial class Program;
+public static partial class Program;

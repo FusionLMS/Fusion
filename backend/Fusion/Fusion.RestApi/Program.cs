@@ -12,9 +12,9 @@ app.Run();
 return;
 
 
-void AddFusionServices(IHostApplicationBuilder webApplicationBuilder)
+void AddFusionServices(IHostApplicationBuilder appBuilder)
 {
-    var services = webApplicationBuilder.Services;
+    var services = appBuilder.Services;
 
     services
         .AddProblemDetails()
@@ -22,7 +22,8 @@ void AddFusionServices(IHostApplicationBuilder webApplicationBuilder)
 
     services
         .AddFusionApiVersioning()
-        .AddFusionSwaggerGen();
+        .AddFusionSwaggerGen()
+        .AddFusionOptions(appBuilder.Configuration);
 }
 
 void ConfigureMiddlewares(WebApplication appBuilder)
@@ -31,5 +32,8 @@ void ConfigureMiddlewares(WebApplication appBuilder)
     appBuilder.UseFusionSwaggerUi();
 }
 
+/// <summary>
+/// Application entry point
+/// </summary>
 [ExcludeFromCodeCoverage]
-internal partial class Program;
+public partial class Program;

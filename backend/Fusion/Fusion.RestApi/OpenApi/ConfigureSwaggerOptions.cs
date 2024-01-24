@@ -2,6 +2,7 @@
 using System.Text;
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
+using Fusion.RestApi.OpenApi.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -11,32 +12,47 @@ namespace Fusion.RestApi.OpenApi;
 /// <summary>
 /// 
 /// </summary>
-/// <param name="provider"></param>
 [ExcludeFromCodeCoverage]
-public class ConfigureSwaggerOptions(
-    IApiVersionDescriptionProvider provider) : IConfigureOptions<SwaggerGenOptions>
+public class ConfigureSwaggerOptions: IConfigureOptions<SwaggerGenOptions>
 {
+    private readonly IApiVersionDescriptionProvider _provider;
+    private readonly SwaggerContactsInfoOptions _contactInfo;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="provider"></param>
+    /// <param name="contactOptions"></param>
+    public ConfigureSwaggerOptions(
+        IApiVersionDescriptionProvider provider,
+        IOptions<SwaggerContactsInfoOptions> contactOptions)
+    {
+        _provider = provider;
+        ArgumentNullException.ThrowIfNull(contactOptions.Value);
+        _contactInfo = contactOptions.Value;
+    }
+
     /// <summary>
     /// 
     /// </summary>
     /// <param name="options"></param>
     public void Configure(SwaggerGenOptions options)
     {
-        foreach (var description in provider.ApiVersionDescriptions)
+        foreach (var description in _provider.ApiVersionDescriptions)
         {
             options.SwaggerDoc(description.GroupName, CreateInfoForApiVersion(description));
         }
     }
 
-    private static OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description)
+    private OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description)
     {
         var text = new StringBuilder($"Fusion LMS API v{description.ApiVersion}.");
         var info = new OpenApiInfo()
         {
             Title = "Fusion LMS API",
             Version = description.ApiVersion.ToString(),
-            Contact = new OpenApiContact { Name = "Fusion LMS Team", Url = new Uri("https://github.com/FusionLMS") },
-            License = new OpenApiLicense { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
+            Contact = new OpenApiContact { Name = "Fusion LMS Team", Url = new Uri(_contactInfo.ContactUri!) },
+            License = new OpenApiLicense { Name = "MIT", Url = new Uri(_contactInfo.LicenseUri!) }
         };
 
         if (description.IsDeprecated)

@@ -2,12 +2,12 @@
 using System.Text;
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
-using Fusion.RestApi.OpenApi.Options;
+using Fusion.RestApi.Swagger.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Fusion.RestApi.OpenApi;
+namespace Fusion.RestApi.Swagger;
 
 /// <summary>
 /// 

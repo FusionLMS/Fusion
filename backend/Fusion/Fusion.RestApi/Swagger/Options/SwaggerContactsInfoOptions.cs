@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Fusion.RestApi.OpenApi.Options;
+namespace Fusion.RestApi.Swagger.Options;
 
 /// <summary>
 /// Represents the contact information options used in Swagger documentation.

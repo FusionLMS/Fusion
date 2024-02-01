@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Fusion.RestApi.Auth;
+using Fusion.RestApi.Profile;
 
 namespace Fusion.RestApi.Routing;
 
@@ -26,5 +27,6 @@ public static class RoutingBuilder
             .RequireAuthorization("access:full");
 
         app.AddAuthEndpoints();
+        app.AddProfileEndpoints();
     }
 }

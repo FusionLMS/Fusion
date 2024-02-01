@@ -15,8 +15,7 @@ public class ProfileService(
     {
         ArgumentNullException.ThrowIfNull(profileDto);
 
-        var spec = ProfileSpecs.ByFirstName(profileDto.FirstName) &
-                   ProfileSpecs.ByLastName(profileDto.LastName);
+        var spec = ProfileSpecs.ByEmail(profileDto.Email);
         var isDuplicate = await profileRepository.ExistsBySpecification(spec);
         if (isDuplicate)
         {

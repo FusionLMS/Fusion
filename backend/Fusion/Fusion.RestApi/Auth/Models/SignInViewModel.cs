@@ -1,8 +1,11 @@
-﻿namespace Fusion.RestApi.Auth.Models;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Fusion.RestApi.Auth.Models;
 
 /// <summary>
 /// Represents the data model for user sign-in.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public record SignInViewModel
 {
     /// <summary>

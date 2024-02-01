@@ -1,9 +1,11 @@
-﻿using System.Security.Claims;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Fusion.RestApi.Auth;
 
+[ExcludeFromCodeCoverage]
 internal static class FusionAuthExtensions
 {
     public static IServiceCollection AddFusionAuthentication(

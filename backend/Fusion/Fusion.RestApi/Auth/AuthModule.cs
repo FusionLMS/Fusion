@@ -1,4 +1,5 @@
-﻿using Asp.Versioning.Builder;
+﻿using System.Diagnostics.CodeAnalysis;
+using Asp.Versioning.Builder;
 using Auth0.AuthenticationApi;
 using Auth0.AuthenticationApi.Models;
 using Fusion.RestApi.Auth.Models;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Fusion.RestApi.Auth;
 
+[ExcludeFromCodeCoverage]
 internal static class AuthModule
 {
     internal static void AddAuthEndpoints(this IVersionedEndpointRouteBuilder app)

@@ -37,11 +37,8 @@ public static class Program
             .AddFusionDatabase(appBuilder.Configuration);
 
         services
-            .AddSingleton<ProblemDetailsFactory, FusionProblemDetailsFactory>();
-
-        services
             .AddProblemDetails()
-            .AddHealthChecks();
+            .AddSingleton<ProblemDetailsFactory, FusionProblemDetailsFactory>();
 
         services
             .AddFusionApiVersioning()

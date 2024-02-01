@@ -5,7 +5,7 @@ namespace Fusion.RestApi.Profile.Models;
 /// <summary>
 /// 
 /// </summary>
-public class CreateProfileViewModel
+public class ProfileViewModel
 {
     /// <summary>
     /// 

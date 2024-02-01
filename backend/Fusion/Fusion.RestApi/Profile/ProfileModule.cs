@@ -19,7 +19,7 @@ public static class ProfileModule
 
         profileV1.MapPost("", async (
             HttpContext httpContext,
-            CreateProfileViewModel req,
+            ProfileViewModel req,
             IProfileService profileService,
             CancellationToken _) =>
         {
@@ -32,6 +32,44 @@ public static class ProfileModule
  
             var result = await profileService.Create(profileDto);
             return result.Match(Results.Ok, e => e.Problem(context: httpContext));
+        });
+
+        profileV1.MapGet("{id:long}", async (
+            long id,
+            HttpContext httpContext,
+            IProfileService profileService,
+            CancellationToken _) =>
+        {
+            var result = await profileService.Get(id);
+            return result.Match(Results.Ok, e => e.Problem(context: httpContext));
+        });
+
+        profileV1.MapPatch("{id:long}", async (
+            long id,
+            ProfileViewModel req,
+            HttpContext httpContext,
+            IProfileService profileService,
+            CancellationToken _) =>
+        {
+            var profileDto = new ProfileDto
+            {
+                Id = id,
+                FirstName = req.FirstName,
+                LastName = req.LastName,
+                Email = req.Email
+            };
+ 
+            var result = await profileService.Update(profileDto);
+            return result.Match(Results.Ok, e => e.Problem(context: httpContext));
+        });
+
+        profileV1.MapDelete("{id:long}", async (
+            long id,
+            IProfileService profileService,
+            CancellationToken _) =>
+        {
+            await profileService.Delete(id);
+            return Results.Ok();
         });
     }
 }

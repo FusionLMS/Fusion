@@ -1,20 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Fusion.Infrastructure.Database;
 
 namespace Fusion.Infrastructure.Profile;
 
-public class ProfileEntity
+public class ProfileEntity : BaseEntity<long>
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public long Id { get; init; }
-
+    [Required]
     [MaxLength(64)]
     public required string FirstName { get; set; }
 
+    [Required]
     [MaxLength(64)]
     public required string LastName { get; set; } 
 
+    [Required]
     [MaxLength(32)]
     public required string Email { get; set; }
 }

@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Fusion.Infrastructure;
 using Fusion.RestApi.Auth;
 using Fusion.RestApi.Extensions;
 using Fusion.RestApi.Routing;
@@ -41,6 +42,9 @@ public static class Program
             .AddFusionApiVersioning()
             .AddFusionSwaggerGen()
             .AddFusionOptions(appBuilder.Configuration);
+
+        services
+            .AddFusionInfrastructure();
     }
 
     private static void ConfigureMiddlewares(WebApplication appBuilder)

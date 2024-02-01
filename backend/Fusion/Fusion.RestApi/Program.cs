@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Fusion.RestApi.Auth;
 using Fusion.RestApi.Extensions;
 using Fusion.RestApi.Routing;
 
@@ -26,6 +27,10 @@ public static class Program
         var services = appBuilder.Services;
 
         services
+            .AddFusionAuthentication(appBuilder.Configuration)
+            .AddFusionAuthorization();
+
+        services
             .AddProblemDetails()
             .AddHealthChecks();
 
@@ -37,6 +42,14 @@ public static class Program
 
     private static void ConfigureMiddlewares(WebApplication appBuilder)
     {
+        if (appBuilder.Environment.IsDevelopment())
+        {
+            appBuilder.UseDeveloperExceptionPage();
+        }
+
+        appBuilder.UseAuthentication();
+        appBuilder.UseAuthorization();
+
         appBuilder.MapFusionRouting();
         appBuilder.UseFusionSwaggerUi();
     }

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Fusion.RestApi.Auth;
 
 namespace Fusion.RestApi.Routing;
 
@@ -14,12 +15,16 @@ public static class RoutingBuilder
     /// <param name="routeBuilder"></param>
     public static void MapFusionRouting(this IEndpointRouteBuilder routeBuilder)
     {
-        var v1 = routeBuilder.NewVersionedApi();
+        var app = routeBuilder.NewVersionedApi();
 
-        var serviceHealthV1 = v1.MapGroup("/api/health/")
-            .HasApiVersion(1.0);
+        var serviceHealthV1 = app.MapGroup("/api/health/")
+            .WithTags("health")
+            .HasApiVersion(1);
 
         serviceHealthV1.MapHealthChecks("healthz");
-        serviceHealthV1.MapGet("status", () => Results.Ok("Ok"));
+        serviceHealthV1.MapGet("status", () => Results.Ok("Ok"))
+            .RequireAuthorization("access:full");
+
+        app.AddAuthEndpoints();
     }
 }

@@ -13,9 +13,10 @@ public static class ProfileModule
     {
         var profileV1 = app.MapGroup("/api/profiles/")
             .WithTags("Profile")
-            .HasApiVersion(1);
+            .HasApiVersion(1)
+            .RequireAuthorization("backend-developer");
 
-        profileV1.MapPost("", async (CreateProfileViewModel req, IProfileService profileService, CancellationToken ct) =>
+        profileV1.MapPost("", async (CreateProfileViewModel req, IProfileService profileService, CancellationToken _) =>
         {
             var profileDto = new ProfileDto
             {

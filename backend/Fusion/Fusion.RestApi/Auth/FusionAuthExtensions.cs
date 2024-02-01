@@ -32,7 +32,7 @@ internal static class FusionAuthExtensions
     {
         services
             .AddAuthorizationBuilder()
-            .AddPolicy("access:full", policy => policy
+            .AddPolicy("backend-developer", policy => policy
                 .RequireAuthenticatedUser()
                 .RequireClaim("permissions", "access:full"));
     }

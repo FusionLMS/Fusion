@@ -1,4 +1,5 @@
 ﻿using Fusion.Infrastructure.Database.Abstractions;
+using Fusion.Infrastructure.Database.Specifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fusion.Infrastructure.Database.Repositories;
@@ -15,10 +16,26 @@ public class RepositoryBase<TKey, TEntity, TContext>(TContext dbContext)
             .FirstOrDefaultAsync(e => e.Id!.Equals(id));
     }
 
-    public async Task Create(TEntity entity)
+    public Task<List<TEntity>> GetBySpecification(Specification<TEntity> spec)
+    {
+        return dbContext.Set<TEntity>()
+            .AsNoTracking()
+            .Where(spec.ToExpression())
+            .ToListAsync();
+    }
+
+    public Task<bool> ExistsBySpecification(Specification<TEntity> spec)
+    {
+        return dbContext.Set<TEntity>()
+            .AnyAsync(spec.ToExpression());
+    }
+
+    public async Task<TEntity> Create(TEntity entity)
     {
         await dbContext.Set<TEntity>().AddAsync(entity);
         await dbContext.SaveChangesAsync();
+
+        return entity;
     }
 
     public async Task Update(TKey id, TEntity entity)

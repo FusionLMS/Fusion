@@ -7,5 +7,5 @@ public class BaseEntity<TKey>
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public required TKey Id { get; init; }
+    public TKey Id { get; set; } = default!;
 }

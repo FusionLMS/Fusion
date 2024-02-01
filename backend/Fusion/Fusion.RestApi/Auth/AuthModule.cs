@@ -22,9 +22,9 @@ internal static class AuthModule
             ArgumentNullException.ThrowIfNull(auth0Options.Value);
 
             var auth0Info = auth0Options.Value;
-            var authRequestBuilder = new AuthenticationApiClient(auth0Info.Domain);
+            var auth0Client = new AuthenticationApiClient(auth0Info.Domain);
 
-            return await authRequestBuilder.GetTokenAsync(new ResourceOwnerTokenRequest
+            return await auth0Client.GetTokenAsync(new ResourceOwnerTokenRequest
             {
                 Username = req.Login,
                 Password = req.Password,

@@ -31,6 +31,9 @@ public static class Program
             .AddFusionAuthorization();
 
         services
+            .AddFusionDatabase(appBuilder.Configuration);
+
+        services
             .AddProblemDetails()
             .AddHealthChecks();
 

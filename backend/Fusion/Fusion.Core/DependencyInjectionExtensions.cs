@@ -1,8 +1,10 @@
-﻿using Fusion.Core.Profile;
+﻿using System.Diagnostics.CodeAnalysis;
+using Fusion.Core.Profile;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Fusion.Core;
 
+[ExcludeFromCodeCoverage]
 public static class DependencyInjectionExtensions
 {
     public static IServiceCollection AddFusionCore(this IServiceCollection services)

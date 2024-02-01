@@ -10,4 +10,8 @@
       <ProjectReference Include="..\Fusion.Infrastructure\Fusion.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="ErrorOr" Version="1.9.0" />
+    </ItemGroup>
+
 </Project>

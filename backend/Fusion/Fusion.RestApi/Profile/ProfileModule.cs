@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning.Builder;
 using Fusion.Core.Profile;
+using Fusion.RestApi.Extensions;
 using Fusion.RestApi.Profile.Models;
 
 namespace Fusion.RestApi.Profile;
@@ -16,7 +17,11 @@ public static class ProfileModule
             .HasApiVersion(1)
             .RequireAuthorization("backend-developer");
 
-        profileV1.MapPost("", async (CreateProfileViewModel req, IProfileService profileService, CancellationToken _) =>
+        profileV1.MapPost("", async (
+            HttpContext httpContext,
+            CreateProfileViewModel req,
+            IProfileService profileService,
+            CancellationToken _) =>
         {
             var profileDto = new ProfileDto
             {
@@ -24,8 +29,9 @@ public static class ProfileModule
                 LastName = req.LastName,
                 Email = req.Email
             };
-
-            return await profileService.Create(profileDto);
+ 
+            var result = await profileService.Create(profileDto);
+            return result.Match(Results.Ok, e => e.Problem(context: httpContext));
         });
     }
 }

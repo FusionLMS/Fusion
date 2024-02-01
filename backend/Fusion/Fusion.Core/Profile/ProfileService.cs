@@ -1,17 +1,18 @@
-﻿using Fusion.Infrastructure.Database.Abstractions;
+﻿using ErrorOr;
+using Fusion.Infrastructure.Database.Abstractions;
 using Fusion.Infrastructure.Profile;
 
 namespace Fusion.Core.Profile;
 
 public interface IProfileService
 {
-    Task<ProfileDto> Create(ProfileDto profileDto);
+    Task<ErrorOr<ProfileDto>> Create(ProfileDto profileDto);
 }
 
 public class ProfileService(
     IProfileRepository profileRepository) : IProfileService
 {
-    public async Task<ProfileDto> Create(ProfileDto profileDto)
+    public async Task<ErrorOr<ProfileDto>> Create(ProfileDto profileDto)
     {
         ArgumentNullException.ThrowIfNull(profileDto);
 
@@ -19,8 +20,7 @@ public class ProfileService(
         var isDuplicate = await profileRepository.ExistsBySpecification(spec);
         if (isDuplicate)
         {
-            // ErrorOr...
-            return null!;
+            return ProfileErrors.Duplicate;
         }
 
         var entity = new ProfileEntity

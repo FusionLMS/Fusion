@@ -54,6 +54,7 @@ public class ProfileService(
             FirstName = profileDto.FirstName,
             LastName = profileDto.LastName,
             Email = profileDto.Email,
+            Auth0UserId = profileDto.Auth0UserId
         };
 
         entity = await profileRepository.Create(entity);

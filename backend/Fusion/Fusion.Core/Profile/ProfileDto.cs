@@ -6,4 +6,5 @@ public record ProfileDto
     public required string FirstName { get; init; }
     public required string LastName { get; init; }
     public required string Email { get; init; }
+    public string? Auth0UserId { get; set; }
 }

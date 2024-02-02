@@ -34,5 +34,27 @@ internal static class AuthModule
                 Scope = "openid"
             }, ct);
         });
+
+        authV1.MapPost("callback", async (object obj) =>
+        {
+            ArgumentNullException.ThrowIfNull(obj);
+        });
+        
+        authV1.MapPost("register", async (SignUpViewModel req, IOptions<Auth0Options> auth0Options, CancellationToken ct) =>
+        {
+            ArgumentNullException.ThrowIfNull(auth0Options.Value);
+
+            var auth0Info = auth0Options.Value;
+            var auth0Client = new AuthenticationApiClient(auth0Info.Domain);
+            
+            return await auth0Client.SignupUserAsync(new SignupUserRequest
+            {
+                ClientId = auth0Info.ClientId,
+                Email = req.Email,
+                Password = req.Password,
+                GivenName = req.FirstName,
+                FamilyName = req.LastName,
+            }, cancellationToken: ct);
+        });
     }
 }

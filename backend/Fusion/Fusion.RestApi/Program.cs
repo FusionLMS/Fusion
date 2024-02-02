@@ -4,7 +4,6 @@ using Fusion.Infrastructure;
 using Fusion.RestApi.Auth;
 using Fusion.RestApi.Extensions;
 using Fusion.RestApi.Routing;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Fusion.RestApi;
 
@@ -38,7 +37,7 @@ public static class Program
 
         services
             .AddProblemDetails()
-            .AddSingleton<ProblemDetailsFactory, FusionProblemDetailsFactory>();
+            .AddHealthChecks();
 
         services
             .AddFusionApiVersioning()

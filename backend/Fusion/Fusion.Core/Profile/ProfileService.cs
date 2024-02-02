@@ -7,8 +7,8 @@ namespace Fusion.Core.Profile;
 public interface IProfileService
 {
     Task<ErrorOr<ProfileDto>> Get(long profileId);
-    Task<ErrorOr<ProfileDto>> Create(ProfileDto profileDto);
-    Task<ErrorOr<ProfileDto>> Update(ProfileDto profileDto);
+    Task<ErrorOr<ProfileDto>> Create(ProfileDto? profileDto);
+    Task<ErrorOr<ProfileDto>> Update(ProfileDto? profileDto);
     Task Delete(long profileId);
 }
 
@@ -34,11 +34,13 @@ public class ProfileService(
         return dto;
     }
 
-    public async Task<ErrorOr<ProfileDto>> Create(ProfileDto profileDto)
+    public async Task<ErrorOr<ProfileDto>> Create(ProfileDto? profileDto)
     {
         // we have to ensure that auth0 account is also deleted
-
-        ArgumentNullException.ThrowIfNull(profileDto);
+        if (profileDto is null)
+        {
+            return ProfileErrors.ValidationFailed;
+        }
 
         var spec = ProfileSpecs.ByEmail(profileDto.Email);
         var isDuplicate = await profileRepository.ExistsBySpecification(spec);
@@ -60,11 +62,13 @@ public class ProfileService(
         return profileDto;
     }
 
-    public async Task<ErrorOr<ProfileDto>> Update(ProfileDto profileDto)
+    public async Task<ErrorOr<ProfileDto>> Update(ProfileDto? profileDto)
     {
         // we have to ensure that auth0 account is also updated
-
-        ArgumentNullException.ThrowIfNull(profileDto);
+        if (profileDto is null)
+        {
+            return ProfileErrors.ValidationFailed;
+        }
 
         var existingProfile = await profileRepository.GetById(profileDto.Id);
         if (existingProfile is null)

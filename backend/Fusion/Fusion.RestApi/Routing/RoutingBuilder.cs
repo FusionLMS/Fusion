@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Fusion.RestApi.Auth;
+using Fusion.RestApi.Profile;
 
 namespace Fusion.RestApi.Routing;
 
@@ -23,8 +24,9 @@ public static class RoutingBuilder
 
         serviceHealthV1.MapHealthChecks("healthz");
         serviceHealthV1.MapGet("status", () => Results.Ok("Ok"))
-            .RequireAuthorization("access:full");
+            .RequireAuthorization("backend-developer");
 
         app.AddAuthEndpoints();
+        app.AddProfileEndpoints();
     }
 }

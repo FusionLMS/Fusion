@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Fusion.RestApi.Profile.Models;
 
 /// <summary>
 /// 
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class ProfileViewModel
 {
     /// <summary>

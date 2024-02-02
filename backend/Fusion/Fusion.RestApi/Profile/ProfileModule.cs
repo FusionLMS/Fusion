@@ -1,4 +1,5 @@
-﻿using Asp.Versioning.Builder;
+﻿using System.Diagnostics.CodeAnalysis;
+using Asp.Versioning.Builder;
 using Fusion.Core.Profile;
 using Fusion.RestApi.Extensions;
 using Fusion.RestApi.Profile.Models;
@@ -8,6 +9,7 @@ namespace Fusion.RestApi.Profile;
 /// <summary>
 /// 
 /// </summary>
+[ExcludeFromCodeCoverage]
 public static class ProfileModule
 {
     internal static void AddProfileEndpoints(this IVersionedEndpointRouteBuilder app)

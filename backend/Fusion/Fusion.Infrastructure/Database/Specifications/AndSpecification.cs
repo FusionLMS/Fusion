@@ -1,7 +1,9 @@
-﻿using System.Linq.Expressions;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq.Expressions;
 
 namespace Fusion.Infrastructure.Database.Specifications;
 
+[ExcludeFromCodeCoverage]
 public class AndSpecification<T> : Specification<T>
 {
     private readonly Specification<T> _left;

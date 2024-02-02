@@ -1,7 +1,9 @@
-﻿using System.Linq.Expressions;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq.Expressions;
 
 namespace Fusion.Infrastructure.Database.Specifications;
 
+[ExcludeFromCodeCoverage]
 public abstract class Specification<T>
 {
     public static readonly Specification<T> True = new TrueSpecification<T>();

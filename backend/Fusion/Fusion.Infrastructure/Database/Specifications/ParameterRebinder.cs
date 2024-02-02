@@ -1,7 +1,9 @@
-﻿using System.Linq.Expressions;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq.Expressions;
 
 namespace Fusion.Infrastructure.Database.Specifications;
 
+[ExcludeFromCodeCoverage]
 public sealed class ParameterRebinder : ExpressionVisitor
 {
     private readonly IDictionary<ParameterExpression, ParameterExpression> _map;

@@ -1,9 +1,11 @@
-﻿using Fusion.Infrastructure.Database.Abstractions;
+﻿using System.Diagnostics.CodeAnalysis;
+using Fusion.Infrastructure.Database.Abstractions;
 using Fusion.Infrastructure.Database.Specifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fusion.Infrastructure.Database.Repositories;
 
+[ExcludeFromCodeCoverage]
 public class RepositoryBase<TKey, TEntity, TContext>(TContext dbContext)
     : IRepository<TKey, TEntity>
     where TContext : DbContext

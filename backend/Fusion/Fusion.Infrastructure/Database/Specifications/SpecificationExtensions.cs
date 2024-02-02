@@ -1,5 +1,8 @@
-﻿namespace Fusion.Infrastructure.Database.Specifications;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Fusion.Infrastructure.Database.Specifications;
+
+[ExcludeFromCodeCoverage]
 public static class SpecificationExtensions
 {
     public static IEnumerable<Specification<TEntity>> Map<TEntity, TValue>(

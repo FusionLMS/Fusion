@@ -7,7 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Auth0.AuthenticationApi" Version="7.26.1" />
+      <PackageReference Include="Auth0.ManagementApi" Version="7.26.1" />
+      <PackageReference Include="Auth0Net.DependencyInjection" Version="3.1.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
+      <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.1" />
+      <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
       <PackageReference Include="Npgsql" Version="8.0.1" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
     </ItemGroup>

@@ -6,16 +6,16 @@ namespace Fusion.Core.Assignment
     {
         public required long Id { get; init; }
 
-        public string? Title { get; init; }
+        public required string Title { get; init; }
 
-        public string? Description { get; init; }
+        public required string Description { get; init; }
 
         public DateTime? StartDate { get; init; }
 
-        public DateTime? Deadline { get; init; }
+        public DateTime Deadline { get; init; }
 
-        public AssignmentType? Type { get; init; }
+        public AssignmentType Type { get; init; }
 
-        public double? MaxGrade { get; init; }
+        public double MaxGrade { get; init; }
     }
 }

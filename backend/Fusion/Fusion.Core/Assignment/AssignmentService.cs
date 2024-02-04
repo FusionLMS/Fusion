@@ -91,20 +91,12 @@ namespace Fusion.Core.Assignment
                 return AssignmentErrors.NotFound(assignmentToUpdate.Id);
             }
 
-            if (assignmentToUpdate.Title is not null)
-            {
-                assignment.Title = assignmentToUpdate.Title;
-            }
-
-            if (assignmentToUpdate.Description is not null)
-            {
-                assignment.Description = assignmentToUpdate.Description;
-            }
-
+            assignment.Title = assignmentToUpdate.Title;
+            assignment.Description = assignmentToUpdate.Description;
             assignment.StartDate = assignmentToUpdate.StartDate.GetValueOrDefault(assignment.StartDate);
-            assignment.Deadline = assignmentToUpdate.Deadline.GetValueOrDefault(assignment.Deadline);
-            assignment.MaxGrade = assignmentToUpdate.MaxGrade.GetValueOrDefault(assignment.MaxGrade);
-            assignment.Type = assignmentToUpdate.Type.GetValueOrDefault(assignment.Type);
+            assignment.Deadline = assignmentToUpdate.Deadline;
+            assignment.MaxGrade = assignmentToUpdate.MaxGrade;
+            assignment.Type = assignmentToUpdate.Type;
 
             await assignmentRepository.Update(assignment.Id, assignment);
 

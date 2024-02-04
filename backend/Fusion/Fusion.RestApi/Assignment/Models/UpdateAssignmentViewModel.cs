@@ -13,32 +13,37 @@ namespace Fusion.RestApi.Assignment.Models
         /// <summary>
         /// Title of assignment to update. If null title won't be updated.
         /// </summary>
+        [Required]
         [MaxLength(128)]
-        public string? Title { get; set; }
+        public required string Title { get; set; }
 
         /// <summary>
         /// Description of assignment to update. If null description won't be updated.
         /// </summary>
-        public string? Description { get; init; }
+        [Required]
+        public required string Description { get; set; }
 
         /// <summary>
         /// Start date of assignment to update. If null start date won't be updated.
         /// </summary>
-        public DateTime? StartDate { get; init; }
+        public DateTime? StartDate { get; set; }
 
         /// <summary>
         /// Deadline of assignment to update. If null deadline won't be updated.
         /// </summary>
-        public DateTime? Deadline { get; init; }
+        [Required]
+        public DateTime Deadline { get; set; }
 
         /// <summary>
         /// Type of assignment to update. If null type won't be updated.
         /// </summary>
-        public AssignmentType? Type { get; init; }
+        [Required]
+        public AssignmentType Type { get; set; }
 
         /// <summary>
         /// Max grade of assignment to update. If null max grade won't be updated.
         /// </summary>
-        public double? MaxGrade { get; init; }
+        [Required]
+        public double MaxGrade { get; set; }
     }
 }

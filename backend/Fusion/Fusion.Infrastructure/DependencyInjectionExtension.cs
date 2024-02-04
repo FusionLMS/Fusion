@@ -11,6 +11,7 @@ public static class DependencyInjectionExtension
     public static IServiceCollection AddFusionInfrastructure(this IServiceCollection services)
     {
         services.AddScoped<IProfileRepository, ProfileRepository>();
+        services.AddScoped<IAssignmentRepository, AssignmentRepository>();
 
         return services;
     }

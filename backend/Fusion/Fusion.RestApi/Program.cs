@@ -45,7 +45,7 @@ public static class Program
             .AddFusionOptions(appBuilder.Configuration);
 
         services
-            .AddFusionInfrastructure()
+            .AddFusionInfrastructure(appBuilder.Configuration)
             .AddFusionCore();
     }
 

@@ -1,8 +1,10 @@
-﻿using Fusion.Infrastructure.Database;
+﻿using System.Diagnostics.CodeAnalysis;
+using Fusion.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fusion.RestApi.Extensions;
 
+[ExcludeFromCodeCoverage]
 public static class MigrateDbExtension
 {
    /// <summary>

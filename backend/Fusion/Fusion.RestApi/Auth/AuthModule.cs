@@ -2,8 +2,12 @@
 using Asp.Versioning.Builder;
 using Auth0.AuthenticationApi;
 using Auth0.AuthenticationApi.Models;
+using Fusion.Core.Profile;
+using Fusion.Infrastructure.Database.Abstractions;
+using Fusion.Infrastructure.Profile;
 using Fusion.RestApi.Auth.Models;
 using Fusion.RestApi.Auth.Options;
+using Fusion.RestApi.Extensions;
 using Microsoft.Extensions.Options;
 
 namespace Fusion.RestApi.Auth;
@@ -35,26 +39,37 @@ internal static class AuthModule
             }, ct);
         });
 
-        authV1.MapPost("callback", async (object obj) =>
-        {
-            ArgumentNullException.ThrowIfNull(obj);
-        });
+        // authV1.MapPost("postRegisterHandler", async (PostRegisterHandleModel req, HttpContext httpContext, IProfileService profileService, CancellationToken ct) =>
+        // {
+        //     ArgumentNullException.ThrowIfNull(req);
+        //     var result =  await profileService.Create(new ProfileDto
+        //     {
+        //         FirstName = req.FirstName,
+        //         LastName = req.LastName,
+        //         Email = req.Email,
+        //         Auth0UserId = req.Auth0UserId
+        //     });
+        //     
+        //     return result.Match(Results.Ok, e => e.Problem(context: httpContext));
+        // });
         
-        authV1.MapPost("register", async (SignUpViewModel req, IOptions<Auth0Options> auth0Options, CancellationToken ct) =>
+        authV1.MapPost("postLoginHandler", async (PostLoginHandleModel req, HttpContext httpContext, IProfileService profileService, CancellationToken ct) =>
         {
-            ArgumentNullException.ThrowIfNull(auth0Options.Value);
-
-            var auth0Info = auth0Options.Value;
-            var auth0Client = new AuthenticationApiClient(auth0Info.Domain);
-            
-            return await auth0Client.SignupUserAsync(new SignupUserRequest
+            ArgumentNullException.ThrowIfNull(req);
+            var provider = req.Auth0UserId.Split('|')[0];
+            if(provider.Equals("google-oauth2") || provider.Equals("github"))
             {
-                ClientId = auth0Info.ClientId,
-                Email = req.Email,
-                Password = req.Password,
-                GivenName = req.FirstName,
-                FamilyName = req.LastName,
-            }, cancellationToken: ct);
+                var result = await profileService.Create(new ProfileDto
+                {
+                    FirstName = req.FirstName,
+                    LastName = req.LastName,
+                    Email = req.Email,
+                    Auth0UserId = req.Auth0UserId
+                });
+                return result.Match(Results.Ok, e => e.Problem(context: httpContext));
+            }
+            
+            return Results.Ok(); 
         });
     }
 }

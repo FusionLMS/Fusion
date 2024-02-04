@@ -42,11 +42,19 @@ public class ProfileService(
             return ProfileErrors.ValidationFailed;
         }
 
-        var spec = ProfileSpecs.ByEmail(profileDto.Email);
-        var isDuplicate = await profileRepository.ExistsBySpecification(spec);
-        if (isDuplicate)
+        var specByEmail = ProfileSpecs.ByEmail(profileDto.Email);
+        var isDuplicateByEmail = await profileRepository.ExistsBySpecification(specByEmail);
+        if (isDuplicateByEmail)
         {
             return ProfileErrors.Duplicate(profileDto.Email);
+        }
+        
+        var specByAuth0UserId = ProfileSpecs.ByAuth0UserId(profileDto.Auth0UserId);
+        
+        var isDuplicateByAuth0UserId = await profileRepository.ExistsBySpecification(specByAuth0UserId);
+        if (isDuplicateByAuth0UserId)
+        {
+            return ProfileErrors.Duplicate(profileDto.Auth0UserId);
         }
 
         var entity = new ProfileEntity

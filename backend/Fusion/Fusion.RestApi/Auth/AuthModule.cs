@@ -3,8 +3,6 @@ using Asp.Versioning.Builder;
 using Auth0.AuthenticationApi;
 using Auth0.AuthenticationApi.Models;
 using Fusion.Core.Profile;
-using Fusion.Infrastructure.Database.Abstractions;
-using Fusion.Infrastructure.Profile;
 using Fusion.RestApi.Auth.Models;
 using Fusion.RestApi.Auth.Options;
 using Fusion.RestApi.Extensions;
@@ -38,20 +36,6 @@ internal static class AuthModule
                 Scope = "openid"
             }, ct);
         });
-
-        // authV1.MapPost("postRegisterHandler", async (PostRegisterHandleModel req, HttpContext httpContext, IProfileService profileService, CancellationToken ct) =>
-        // {
-        //     ArgumentNullException.ThrowIfNull(req);
-        //     var result =  await profileService.Create(new ProfileDto
-        //     {
-        //         FirstName = req.FirstName,
-        //         LastName = req.LastName,
-        //         Email = req.Email,
-        //         Auth0UserId = req.Auth0UserId
-        //     });
-        //     
-        //     return result.Match(Results.Ok, e => e.Problem(context: httpContext));
-        // });
         
         authV1.MapPost("postLoginHandler", async (PostLoginHandleModel req, HttpContext httpContext, IProfileService profileService, CancellationToken ct) =>
         {

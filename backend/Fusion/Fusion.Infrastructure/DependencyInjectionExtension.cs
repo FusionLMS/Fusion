@@ -39,7 +39,6 @@ public static class DependencyInjectionExtension
 
         services
             .AddAuth0ManagementClient()
-            .AddManagementAccessToken(opt =>
-                opt.Audience = configuration[auth0SectionName + ":Audience"]);
+            .AddManagementAccessToken();
     }
 }

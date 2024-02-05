@@ -2,8 +2,10 @@
 using Asp.Versioning.Builder;
 using Auth0.AuthenticationApi;
 using Auth0.AuthenticationApi.Models;
+using Fusion.Core.Auth;
 using Fusion.Infrastructure.Auth.Options;
 using Fusion.RestApi.Auth.Models;
+using Fusion.RestApi.Extensions;
 using Microsoft.Extensions.Options;
 
 namespace Fusion.RestApi.Auth;
@@ -37,6 +39,38 @@ internal static class AuthModule
             };
             var response = await authenticationApiClient.GetTokenAsync(body, ct);
             return Results.Ok(response);
+        });
+
+        authV1.MapPost("roles", async(
+            UserRolesViewModel req,
+            HttpContext httpContext,
+            IAuthService authService,
+            CancellationToken ct) =>
+        {
+            var dto = new UserRoleDto()
+            {
+                FusionUserId = req.UserId,
+                Roles = req.Roles
+            };
+
+            var result = await authService.AssignUserToRole(dto, ct);
+            return result.Match(Results.Ok, e => e.Problem(httpContext));
+        });
+
+        authV1.MapPost("roles/unassign", async(
+            UserRolesViewModel req,
+            HttpContext httpContext,
+            IAuthService authService,
+            CancellationToken ct) =>
+        {
+            var dto = new UserRoleDto
+            {
+                FusionUserId = req.UserId,
+                Roles = req.Roles
+            };
+
+            var result = await authService.UnAssignUserFromRole(dto, ct);
+            return result.Match(Results.Ok, e => e.Problem(httpContext));
         });
     }
 }

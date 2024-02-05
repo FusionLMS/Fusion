@@ -1,7 +1,7 @@
-*           @bardin08
+/backend/*          @FusionLMS/backend
 
-/.github/*  @FusionLMS/devops
+/.github/*          @FusionLMS/devops
 
-/backend/*  @FusionLMS/backend
+*                   @bardin08
 
 /.github/CODEOWNERS @bardin08

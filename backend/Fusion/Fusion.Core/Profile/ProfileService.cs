@@ -28,7 +28,8 @@ public class ProfileService(
             Id = entity.Id,
             Email = entity.Email,
             FirstName = entity.FirstName,
-            LastName = entity.LastName
+            LastName = entity.LastName,
+            Auth0UserId = entity.Auth0UserId
         };
 
         return dto;
@@ -47,14 +48,6 @@ public class ProfileService(
         if (isDuplicateByEmail)
         {
             return ProfileErrors.Duplicate(profileDto.Email);
-        }
-        
-        var specByAuth0UserId = ProfileSpecs.ByAuth0UserId(profileDto.Auth0UserId);
-        
-        var isDuplicateByAuth0UserId = await profileRepository.ExistsBySpecification(specByAuth0UserId);
-        if (isDuplicateByAuth0UserId)
-        {
-            return ProfileErrors.Duplicate(profileDto.Auth0UserId);
         }
 
         var entity = new ProfileEntity

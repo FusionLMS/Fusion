@@ -29,9 +29,9 @@ namespace Fusion.Core.Assignment
                 Id = assignment.Id,
                 Title = assignment.Title,
                 Description = assignment.Description,
-                Deadline = assignment.Deadline,
+                Deadline = assignment.Deadline.UtcDateTime,
                 MaxGrade = assignment.MaxGrade,
-                StartDate = assignment.StartDate,
+                StartDate = assignment.StartDate.UtcDateTime,
                 Status = assignment.Status,
                 Type = assignment.Type,
             };
@@ -72,9 +72,9 @@ namespace Fusion.Core.Assignment
                 Id = assignmentEntityToCreate.Id,
                 Title = assignmentEntityToCreate.Title,
                 Description = assignmentEntityToCreate.Description,
-                Deadline = assignmentEntityToCreate.Deadline,
+                Deadline = assignmentEntityToCreate.Deadline.UtcDateTime,
                 MaxGrade = assignmentEntityToCreate.MaxGrade,
-                StartDate = assignmentEntityToCreate.StartDate,
+                StartDate = assignmentEntityToCreate.StartDate.UtcDateTime,
                 Status = assignmentEntityToCreate.Status,
                 Type = assignmentEntityToCreate.Type,
             };
@@ -93,7 +93,7 @@ namespace Fusion.Core.Assignment
 
             assignment.Title = assignmentToUpdate.Title;
             assignment.Description = assignmentToUpdate.Description;
-            assignment.StartDate = assignmentToUpdate.StartDate.GetValueOrDefault(assignment.StartDate);
+            assignment.StartDate = assignmentToUpdate.StartDate.GetValueOrDefault(assignment.StartDate.UtcDateTime);
             assignment.Deadline = assignmentToUpdate.Deadline;
             assignment.MaxGrade = assignmentToUpdate.MaxGrade;
             assignment.Type = assignmentToUpdate.Type;
@@ -105,9 +105,9 @@ namespace Fusion.Core.Assignment
                 Id = assignment.Id,
                 Title = assignment.Title,
                 Description = assignment.Description,
-                Deadline = assignment.Deadline,
+                Deadline = assignment.Deadline.UtcDateTime,
                 MaxGrade = assignment.MaxGrade,
-                StartDate = assignment.StartDate,
+                StartDate = assignment.StartDate.UtcDateTime,
                 Status = assignment.Status,
                 Type = assignment.Type,
             };

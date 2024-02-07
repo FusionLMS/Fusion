@@ -244,8 +244,8 @@ namespace Fusion.Tests.Core.Assignment
             result.Value.Id.Should().Be(assignmentEntity.Id);
             result.Value.Title.Should().Be(assignmentEntity.Title);
             result.Value.Description.Should().Be(assignmentEntity.Description);
-            result.Value.Deadline.Should().Be(assignmentEntity.Deadline);
-            result.Value.StartDate.Should().Be(assignmentEntity.StartDate);
+            result.Value.Deadline.Should().Be(assignmentEntity.Deadline.UtcDateTime);
+            result.Value.StartDate.Should().Be(assignmentEntity.StartDate.UtcDateTime);
             result.Value.MaxGrade.Should().Be(assignmentEntity.MaxGrade);
             result.Value.Status.Should().Be(assignmentEntity.Status);
             result.Value.Type.Should().Be(assignmentEntity.Type);

@@ -13,10 +13,10 @@ namespace Fusion.Infrastructure.Assignment
         public required string Description { get; set; }
 
         [Required]
-        public DateTime StartDate { get; set; }
+        public DateTimeOffset StartDate { get; set; }
 
         [Required]
-        public DateTime Deadline { get; set; }
+        public DateTimeOffset Deadline { get; set; }
 
         public AssignmentType Type { get; set; }
 

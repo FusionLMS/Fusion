@@ -82,7 +82,7 @@ namespace Fusion.Tests.Core.Assignment
                 Title = string.Empty,
                 Description = string.Empty,
                 Deadline = DateTime.MinValue,
-                StartDate = DateTime.UtcNow,
+                StartDate = DateTime.Now,
             };
 
             // Act
@@ -123,18 +123,19 @@ namespace Fusion.Tests.Core.Assignment
         public async Task CreateAsync_ShouldCreateAssignmentImmediately_WhenAssignmentStartDateIsNull()
         {
             // Arrange
-            var now = DateTime.UtcNow;
+            var now = DateTimeOffset.Now;
             var assignmentToCreate = new CreateAssignmentDto
             {
                 Title = string.Empty,
                 Description = string.Empty,
                 StartDate = null,
+                Deadline = now.AddDays(1).DateTime
             };
             var assignmentEntity = new AssignmentEntity
             {
                 Title = string.Empty,
                 Description = string.Empty,
-                Deadline = DateTime.MaxValue,
+                Deadline = DateTimeOffset.MaxValue,
                 StartDate = now,
                 Status = AssignmentStatus.Open
             };
@@ -151,7 +152,7 @@ namespace Fusion.Tests.Core.Assignment
             // Assert
             result.Value.Should().NotBeNull();
             result.IsError.Should().BeFalse();
-            result.Value.StartDate.Should().Be(now);
+            result.Value.StartDate.Should().Be(now.DateTime);
             result.Value.Status.Should().Be(AssignmentStatus.Open);
         }
 
@@ -165,8 +166,8 @@ namespace Fusion.Tests.Core.Assignment
                 Id = 1,
                 Title = assignmentDto.Title,
                 Description = assignmentDto.Description,
-                Deadline = assignmentDto.Deadline,
-                StartDate = assignmentDto.StartDate!.Value,
+                Deadline = new DateTimeOffset(assignmentDto.Deadline),
+                StartDate = new DateTimeOffset(assignmentDto.StartDate!.Value),
                 MaxGrade = assignmentDto.MaxGrade,
                 Status = AssignmentStatus.Created
             };
@@ -226,7 +227,7 @@ namespace Fusion.Tests.Core.Assignment
                 Title = assignmentDto.Title,
                 Description = assignmentDto.Description,
                 Deadline = assignmentDto.Deadline,
-                StartDate = assignmentDto.StartDate.GetValueOrDefault(DateTime.UtcNow),
+                StartDate = assignmentDto.StartDate.GetValueOrDefault(DateTime.Now),
                 MaxGrade = assignmentDto.MaxGrade,
                 Status = AssignmentStatus.PassedDeadline,
                 Type = assignmentDto.Type,
@@ -244,8 +245,8 @@ namespace Fusion.Tests.Core.Assignment
             result.Value.Id.Should().Be(assignmentEntity.Id);
             result.Value.Title.Should().Be(assignmentEntity.Title);
             result.Value.Description.Should().Be(assignmentEntity.Description);
-            result.Value.Deadline.Should().Be(assignmentEntity.Deadline.UtcDateTime);
-            result.Value.StartDate.Should().Be(assignmentEntity.StartDate.UtcDateTime);
+            result.Value.Deadline.Should().Be(assignmentEntity.Deadline.DateTime);
+            result.Value.StartDate.Should().Be(assignmentEntity.StartDate.DateTime);
             result.Value.MaxGrade.Should().Be(assignmentEntity.MaxGrade);
             result.Value.Status.Should().Be(assignmentEntity.Status);
             result.Value.Type.Should().Be(assignmentEntity.Type);

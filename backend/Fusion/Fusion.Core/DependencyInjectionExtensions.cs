@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Fusion.Core.Auth;
+using Fusion.Core.Assignment;
 using Fusion.Core.Profile;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +13,7 @@ public static class DependencyInjectionExtensions
     {
         services.AddScoped<IProfileService, ProfileService>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IAssignmentService, AssignmentService>();
 
         return services;
     }

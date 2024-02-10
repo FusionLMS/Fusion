@@ -15,6 +15,7 @@ public static class DependencyInjectionExtension
         this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IProfileRepository, ProfileRepository>();
+        services.AddScoped<IAssignmentRepository, AssignmentRepository>();
 
         services.AddAuth0Services(configuration);
 

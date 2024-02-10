@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Fusion.RestApi.Assignment;
 using Fusion.RestApi.Auth;
 using Fusion.RestApi.Profile;
 
@@ -28,5 +29,6 @@ public static class RoutingBuilder
 
         app.AddAuthEndpoints();
         app.AddProfileEndpoints();
+        app.AddAssignmentEndpoints();
     }
 }

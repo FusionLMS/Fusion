@@ -1,5 +1,8 @@
-﻿namespace Fusion.Core.Auth;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Fusion.Core.Auth;
+
+[ExcludeFromCodeCoverage]
 public record RoleDto
 {
     public required string Id { get; init; }

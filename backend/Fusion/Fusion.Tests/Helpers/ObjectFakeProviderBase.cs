@@ -8,8 +8,7 @@ public abstract class ObjectFakeProviderBase<TModel>(int amount) : IEnumerable<o
 {
     protected virtual int FakesNumber { get; set; } = amount;
 
-    // if this property is not override it will cause ArgumentNullException
-    protected virtual Func<Faker<TModel>> DefaultFactory => () => null!;
+    protected virtual Func<Faker<TModel>> DefaultFactory => () => throw new NotImplementedException();
 
     internal TModel Get()
     {

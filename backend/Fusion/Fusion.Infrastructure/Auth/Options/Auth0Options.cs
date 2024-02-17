@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Fusion.RestApi.Auth.Options;
+namespace Fusion.Infrastructure.Auth.Options;
 
 /// <summary>
 /// Represents the configuration options required for Auth0 authentication.
 /// </summary>
 [ExcludeFromCodeCoverage]
-internal record Auth0Options
+public record Auth0Options
 {
     /// <summary>
     /// Gets the configuration section name in the application settings.

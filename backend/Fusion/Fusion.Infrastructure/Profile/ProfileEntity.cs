@@ -16,4 +16,7 @@ public class ProfileEntity : BaseEntity<long>
     [Required]
     [MaxLength(32)]
     public required string Email { get; set; }
+
+    [MaxLength(64)]
+    public string? Auth0UserId { get; set; }
 }

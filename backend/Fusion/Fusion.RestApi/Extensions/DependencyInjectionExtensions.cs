@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Fusion.Infrastructure.Database;
-using Fusion.RestApi.Auth.Options;
 using Fusion.RestApi.Swagger.Options;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,9 +12,6 @@ internal static class DependencyInjectionExtensions
     {
         services.Configure<SwaggerContactsInfoOptions>(
             configuration.GetSection(SwaggerContactsInfoOptions.SectionName));
-
-        services.Configure<Auth0Options>(
-            configuration.GetSection(Auth0Options.SectionName));
 
         return services;
     }

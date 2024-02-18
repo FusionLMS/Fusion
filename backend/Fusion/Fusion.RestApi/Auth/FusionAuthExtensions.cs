@@ -34,6 +34,12 @@ internal static class FusionAuthExtensions
             .AddAuthorizationBuilder()
             .AddPolicy("backend-developer", policy => policy
                 .RequireAuthenticatedUser()
-                .RequireClaim("permissions", "access:full"));
+                .RequireClaim("permissions", "access:full"))
+            .AddPolicy("teacher", policy => policy
+                .RequireAuthenticatedUser()
+                .RequireClaim("permissions", "assignments:full_access", "assignments:read"))
+            .AddPolicy("student", policy => policy
+                .RequireAuthenticatedUser()
+                .RequireClaim("permissions", "assignments:read"));
     }
 }

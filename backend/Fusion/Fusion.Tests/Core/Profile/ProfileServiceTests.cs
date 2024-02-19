@@ -34,6 +34,7 @@ public class ProfileServiceTests
         result.Value.FirstName.Should().Be(dto.FirstName);
         result.Value.LastName.Should().Be(dto.LastName);
         result.Value.Email.Should().Be(dto.Email);
+        result.Value.Auth0UserId.Should().Be(dto.Auth0UserId);
     }
 
     [Fact]
@@ -99,7 +100,8 @@ public class ProfileServiceTests
             Id = dto.Id,
             Email = dto.Email,
             FirstName = dto.FirstName,
-            LastName = dto.LastName
+            LastName = dto.LastName,
+            Auth0UserId = dto.Auth0UserId
         };
 
         _profileRepositoryMock.GetById(Arg.Any<long>()).Returns(oldEnt);
@@ -113,6 +115,7 @@ public class ProfileServiceTests
         result.Value.FirstName.Should().Be(updatedProfile.FirstName);
         result.Value.LastName.Should().Be(updatedProfile.LastName);
         result.Value.Email.Should().Be(updatedProfile.Email);
+        result.Value.Auth0UserId.Should().Be(updatedProfile.Auth0UserId);
     }
 
     [Fact]
@@ -138,7 +141,8 @@ public class ProfileServiceTests
             Id = dto.Id,
             Email = dto.Email,
             FirstName = dto.FirstName,
-            LastName = dto.LastName
+            LastName = dto.LastName,
+            Auth0UserId = dto.Auth0UserId,
         };
 
         _profileRepositoryMock.GetById(Arg.Any<long>())!.Returns(Task.FromResult(profileEntity));
@@ -150,6 +154,7 @@ public class ProfileServiceTests
         result.Value.FirstName.Should().Be(dto.FirstName);
         result.Value.LastName.Should().Be(dto.LastName);
         result.Value.Email.Should().Be(dto.Email);
+        result.Value.Auth0UserId.Should().Be(dto.Auth0UserId);
     }
 
     // This is a formal test to keep code coverage.

@@ -2,6 +2,7 @@
 using Asp.Versioning.Builder;
 using Auth0.AuthenticationApi;
 using Auth0.AuthenticationApi.Models;
+using Fusion.Core.Profile;
 using Fusion.Core.Auth;
 using Fusion.Infrastructure.Auth.Options;
 using Fusion.RestApi.Auth.Models;
@@ -71,6 +72,25 @@ internal static class AuthModule
 
             var result = await authService.UnAssignUserFromRole(dto, ct);
             return result.Match(Results.Ok, e => e.Problem(httpContext));
+        });
+        
+        authV1.MapPost("postLoginHandler", async (PostLoginHandleModel req, HttpContext httpContext, IProfileService profileService, CancellationToken ct) =>
+        {
+            ArgumentNullException.ThrowIfNull(req);
+            var provider = req.Auth0UserId.Split('|')[0];
+            if(provider.Equals("google-oauth2") || provider.Equals("github"))
+            {
+                var result = await profileService.Create(new ProfileDto
+                {
+                    FirstName = req.FirstName,
+                    LastName = req.LastName,
+                    Email = req.Email,
+                    Auth0UserId = req.Auth0UserId
+                });
+                return result.Match(Results.Ok, e => e.Problem(context: httpContext));
+            }
+            
+            return Results.Ok(); 
         });
     }
 }

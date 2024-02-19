@@ -19,6 +19,7 @@ public static class Program
         AddFusionServices(builder);
 
         var app = builder.Build();
+        
         ConfigureMiddlewares(app);
 
         app.Run();
@@ -54,6 +55,7 @@ public static class Program
         if (appBuilder.Environment.IsDevelopment())
         {
             appBuilder.UseDeveloperExceptionPage();
+            appBuilder.ApplyMigrations();
         }
 
         appBuilder.UseAuthentication();
